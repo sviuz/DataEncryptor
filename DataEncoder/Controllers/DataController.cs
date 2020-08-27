@@ -8,6 +8,7 @@ namespace DataEncryptor.Controllers
     public class DataController : ControllerBase
     {
         private IEncryptorService _encryptorService;
+
         public DataController(IEncryptorService encryptorService)
         {
             _encryptorService = encryptorService;

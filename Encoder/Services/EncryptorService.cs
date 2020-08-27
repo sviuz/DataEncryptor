@@ -1,4 +1,5 @@
-﻿using DataModels.Models;
+﻿using DataModels.Entities;
+using DataModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,13 @@ namespace EncryptorLOGIC.Services
 {
     public class EncryptorService : IEncryptorService
     {
+        private readonly DataBaseContext _dataBaseContext;
+
+        public EncryptorService(DataBaseContext dataBaseContext)
+        {
+            _dataBaseContext = dataBaseContext;
+        }
+
         public Task AddData(Model model)
         {
             throw new NotImplementedException();
