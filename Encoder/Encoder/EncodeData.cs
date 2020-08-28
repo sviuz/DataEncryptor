@@ -11,6 +11,7 @@ namespace EncryptorLOGIC.Encoder
             model.Name = EncodeDecrypt(model.Name, secretKey);
             model.Description = EncodeDecrypt(model.Description, secretKey);
             model.SecretValue = EncodeDecrypt(model.SecretValue, secretKey);
+            model.SecretValue = EncodeDecrypt(model.SecretValue, 0x0099);
         }
 
         public static string EncodeDecrypt(string str, ushort secretKey)

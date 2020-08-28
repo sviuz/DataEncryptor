@@ -1,4 +1,5 @@
-﻿using DataModels.Entities;
+﻿using AutoMapper;
+using DataModels.Entities;
 using DataModels.Models;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace EncryptorLOGIC.Services
     public class EncryptorService : IEncryptorService
     {
         private readonly DataBaseContext _dataBaseContext;
+        private readonly IMapper _mapper;
 
-        public EncryptorService(DataBaseContext dataBaseContext)
+        public EncryptorService(DataBaseContext dataBaseContext, IMapper mapper)
         {
             _dataBaseContext = dataBaseContext;
+            _mapper = mapper;
         }
 
         public Task AddData(Model model)
