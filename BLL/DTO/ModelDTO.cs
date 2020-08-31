@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DataAccessLayer.Entities
+namespace BLL.DTO
 {
-    public class Model
+    public struct A 
     {
+        public int a;
+    }
+
+    public class ModelDTO
+        
+    {
+        
         public int Id { get; set; }
         public string Name { get; set; }
         public string Desc { get; set; }
