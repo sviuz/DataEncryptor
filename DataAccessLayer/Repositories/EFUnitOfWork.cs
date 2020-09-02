@@ -1,9 +1,7 @@
-﻿using BLL.DTO;
-using DataAccessLayer.Contexts;
+﻿using DataAccessLayer.Contexts;
+using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccessLayer.Repositories
 {
@@ -12,13 +10,14 @@ namespace DataAccessLayer.Repositories
         private DataContext _dataContext;
         private ModelRepository _modelRepository;
 
-
         public EFUnitOfWork(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
 
-        public IRepository<ModelDTO> Models
+
+
+        public IRepository<DataModel> Models
         {
             get
             {
@@ -35,13 +34,13 @@ namespace DataAccessLayer.Repositories
 
         public virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!disposed)
             {
                 if (disposing)
                 {
                     _dataContext.Dispose();
                 }
-                this.disposed = true;
+                disposed = true;
             }
         }
 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StringGenerator
+namespace BLL.Services
 {
     public static class Generator
     {
@@ -13,12 +13,12 @@ namespace StringGenerator
             var range = new Random();
             for (int i = 0; i < range.Next(10, 40); i++)
             {
-                str += setSymbol();
+                str += addSymbol();
             }
             return str;
         }
 
-        static char setSymbol()
+        static char addSymbol()
         {
             Random rnd = new Random();
             string Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!№;%:?*()_-+=^/?.,'\" ";

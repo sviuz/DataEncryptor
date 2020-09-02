@@ -1,21 +1,27 @@
-﻿using BLL.DTO;
+﻿using AutoMapper;
+using BLL.DTO;
 using BLL.Interfaces;
+using DataAccessLayer.Entities;
+using DataAccessLayer.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BLL.Services
 {
     public class ModelService : IModelService
     {
-        
-        public ModelService()
+        private readonly IUnitOfWork database;
+        private readonly IMapper _mapper;
+
+        public ModelService(IUnitOfWork uow)
         {
+            database = uow;
         }
 
         public void Create(ModelDTO model)
         {
-            throw new NotImplementedException();
+            var newModel = _mapper.Map<DataModel>(model);
+            database.Models.Create(newModel);
         }
 
         public void Delete(ModelDTO model)
@@ -25,17 +31,15 @@ namespace BLL.Services
 
         public ModelDTO Get(int id)
         {
-            throw new NotImplementedException();
+            var model = _mapper.Map<ModelDTO>(database.Models.Get(id));
+            return model;
         }
 
         public IEnumerable<ModelDTO> GetAll()
         {
-            throw new NotImplementedException();
+            var models = _mapper.Map<IEnumerable<ModelDTO>>(database.Models.Get());
+            return models;
         }
 
-        public void Update(ModelDTO model)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

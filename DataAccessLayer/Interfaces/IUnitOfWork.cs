@@ -1,13 +1,11 @@
-﻿using BLL.DTO;
+﻿using DataAccessLayer.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DataAccessLayer.Interfaces
 {
     public interface IUnitOfWork :IDisposable
     {
-        IRepository<ModelDTO> Models { get; }
+        IRepository<DataModel> Models { get; }
         void Save();
     }
 }

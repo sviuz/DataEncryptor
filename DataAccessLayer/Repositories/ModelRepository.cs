@@ -1,22 +1,23 @@
-﻿using BLL.DTO;
-using DataAccessLayer.Contexts;
+﻿using DataAccessLayer.Contexts;
+using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataAccessLayer.Repositories
 {
-    public class ModelRepository :IRepository<ModelDTO>
+    public class ModelRepository :IRepository<DataModel>
     {
         private DataContext _dataContext;
 
         public ModelRepository(DataContext dataContext)
         {
-            this._dataContext = dataContext;
+            _dataContext = dataContext;
         }
 
 
-        public void Create(ModelDTO item)
+        public void Create(DataModel item)
         {
             _dataContext.Models.Add(item);
         }
@@ -30,17 +31,17 @@ namespace DataAccessLayer.Repositories
             }
         }
 
-        public IEnumerable<ModelDTO> Get()
+        public IEnumerable<DataModel> Get()
         {
-            return _dataContext.Models;
+            return _dataContext.Models.AsNoTracking().AsEnumerable();
         }
 
-        public ModelDTO Get(int id)
+        public DataModel Get(int id)
         {
             return _dataContext.Models.Find(id);
         }
 
-        public void Update(ModelDTO item)
+        public void Update(DataModel item)
         {
             _dataContext.Entry(item).State = EntityState.Modified;
         }

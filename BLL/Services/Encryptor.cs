@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace StringGenerator
+namespace BLL.Services
 {
     public static class Encryptor
     {
