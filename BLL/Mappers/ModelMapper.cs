@@ -4,9 +4,9 @@ using DataAccessLayer.Entities;
 
 namespace BLL.Mappers
 {
-    public class Mapper :Profile
+    public class ModelMapper :Profile
     {
-        public Mapper()
+        public ModelMapper()
         {
             CreateMap<ModelDTO, DataModel>();
             CreateMap<DataModel, ModelDTO>();

@@ -13,9 +13,10 @@ namespace BLL.Services
         private readonly IUnitOfWork database;
         private readonly IMapper _mapper;
 
-        public ModelService(IUnitOfWork uow)
+        public ModelService(IUnitOfWork uow, IMapper mapper)
         {
             database = uow;
+            _mapper = mapper;
         }
 
         public void Create(ModelDTO model)

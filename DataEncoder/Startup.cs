@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using DataAccessLayer.Contexts;
 using Microsoft.EntityFrameworkCore;
+using DataAccessLayer.Entities;
+using BLL.Mappers;
 
 namespace DataEncoder
 {
@@ -25,20 +27,18 @@ namespace DataEncoder
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddControllers();
+            services.AddAutoMapper(typeof(ModelMapper));
 
-            var mappingConfig = new MapperConfiguration(mc => 
+            services.AddDbContext<DataContext>(options => 
             {
-                mc.AddProfile(new BLL.Mappers.Mapper());
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            var connectionString = Configuration
-                .GetConnectionString("DefaultConnection");//Getting Connection string
-            services.AddDbContext<DataContext>(options
-                => options.UseMySql(connectionString));
-
-            services.AddScoped<IModelService, ModelService>();
-            services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+            services.AddTransient<IModelService, ModelService>();
+            services.AddTransient<IUnitOfWork, EFUnitOfWork>();
+            services.AddScoped<IRepository<DataModel>, ModelRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
