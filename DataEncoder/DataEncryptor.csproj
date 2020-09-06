@@ -9,9 +9,5 @@
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Brand\" />
-  </ItemGroup>
-
 
 </Project>

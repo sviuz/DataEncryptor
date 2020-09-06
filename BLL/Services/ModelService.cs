@@ -23,11 +23,14 @@ namespace BLL.Services
         {
             var newModel = _mapper.Map<DataModel>(model);
             database.Models.Create(newModel);
+            database.Save();
         }
 
         public void Delete(ModelDTO model)
         {
-            throw new NotImplementedException();
+            var data = _mapper.Map<DataModel>(model);
+            database.Models.Delete(data.Id);
+            database.Save();
         }
 
         public ModelDTO Get(int id)
