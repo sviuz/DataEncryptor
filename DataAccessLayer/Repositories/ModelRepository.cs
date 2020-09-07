@@ -50,9 +50,9 @@ namespace DataAccessLayer.Repositories
             return _dataContext.Models.Find(id);
         }
 
-        public void Update(DataModel item)
+        public void Update(DataModel model)
         {
-            _dataContext.Entry(item).State = EntityState.Modified;
+            _dataContext.Entry(model).State = EntityState.Modified;
         }
     }
 }

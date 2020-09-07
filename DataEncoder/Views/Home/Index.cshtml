@@ -18,6 +18,7 @@
                 <tr class="list-table-tr" data-id="@m.Id">
                     <td class="list-table-td">@m.Name</td>
                     <td class="list-table-td">@m.Desc</td>
+                    <td><a asp-controller="Model" asp-action="EditModel" asp-route-id="@m.Id">Edit Model</a></td>
                 </tr>
             }
         </table>

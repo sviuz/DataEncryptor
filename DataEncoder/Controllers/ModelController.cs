@@ -23,5 +23,26 @@ namespace DataEncryptor.Controllers
             _modelService.Create(model);
             return Redirect("/Home");
         }
+
+        public IActionResult EditModel(int id)
+        {
+            var model = _modelService.Get(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditModel(ModelDTO model)
+        {
+            try
+            {
+                _modelService.Update(model);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+            return Redirect("/Home");
+        }
+
     }
 }

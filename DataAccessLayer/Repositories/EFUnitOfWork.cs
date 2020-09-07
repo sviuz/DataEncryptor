@@ -2,7 +2,6 @@
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
 using System;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {

@@ -45,5 +45,11 @@ namespace BLL.Services
             return models;
         }
 
+        public void Update(ModelDTO model)
+        {
+            var newModel = _mapper.Map<DataModel>(model);
+            database.Models.Update(newModel);
+            database.Save();
+        }
     }
 }

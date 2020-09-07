@@ -9,5 +9,6 @@ namespace BLL.Interfaces
         ModelDTO Get(int id);
         void Create(ModelDTO model);
         void Delete(ModelDTO model);
+        void Update(ModelDTO model);
     }
 }
