@@ -3,6 +3,7 @@ using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace DataAccessLayer.Repositories
@@ -19,7 +20,15 @@ namespace DataAccessLayer.Repositories
 
         public void Create(DataModel item)
         {
-            _dataContext.Models.Add(item);
+            try
+            {
+                var newItem = new DataModel { Id = item.Id, Name = item.Name, Desc = item.Desc };
+                _dataContext.Models.Add(newItem);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex.InnerException;
+            }
         }
 
         public void Delete(int id)

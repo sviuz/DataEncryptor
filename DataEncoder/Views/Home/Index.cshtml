@@ -2,20 +2,27 @@
 @model IEnumerable<ModelDTO>
 
 
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        @foreach (var m in Model)
-        {
-            <tr class="list-table-tr" data-id="@m.Id">
-                <td class="list-table-td">@m.Name</td>
-                <td class="list-table-td">@m.Desc</td>
-            </tr>
-        }
-    </table>
-</div>
+<!DOCTYPE html>
+<html>
+<body>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            @foreach (var m in Model)
+            {
+                <tr class="list-table-tr" data-id="@m.Id">
+                    <td class="list-table-td">@m.Name</td>
+                    <td class="list-table-td">@m.Desc</td>
+                </tr>
+            }
+        </table>
+        <a asp-controller="Model" asp-action="AddModel">Add Model</a>
+        
+    </div>
+</body>
+</html>

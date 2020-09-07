@@ -1,1 +1,26 @@
-﻿
+﻿<!DOCTYPE html>
+<html>
+<body>
+    <div>
+        @using (Html.BeginForm("AddModel", "Model", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" maxlength="3" required name="Name"/> </td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td><input type="text" required name="Desc" /> </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Создать" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>
+

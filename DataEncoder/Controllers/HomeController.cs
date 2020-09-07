@@ -21,5 +21,10 @@ namespace DataEncryptor.Controllers
             var models = _modelService.GetAll();
             return View(models);
         }
+
+        public IActionResult AddModel()
+        {
+            return View("/Model/AddModel");
+        }
     }
 }

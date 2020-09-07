@@ -2,6 +2,7 @@
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace DataAccessLayer.Repositories
 {
@@ -15,8 +16,6 @@ namespace DataAccessLayer.Repositories
             _dataContext = dataContext;
         }
 
-
-
         public IRepository<DataModel> Models
         {
             get
@@ -28,7 +27,6 @@ namespace DataAccessLayer.Repositories
                 return _modelRepository;
             }
         }
-
 
         private bool disposed = false;
 
@@ -52,7 +50,18 @@ namespace DataAccessLayer.Repositories
 
         public void Save()
         {
-            _dataContext.SaveChanges();
+            try
+            {
+               _dataContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _dataContext.SaveChanges();
+            }
         }
     }
 }

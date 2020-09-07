@@ -8,11 +8,10 @@ namespace DataEncryptor.Controllers
     {
         private readonly IModelService _modelService;
 
-        public ModelController(IModelService modelService) 
+        public ModelController(IModelService modelService)
         {
             _modelService = modelService;
         }
-
         public IActionResult AddModel()
         {
             return View();
@@ -22,9 +21,7 @@ namespace DataEncryptor.Controllers
         public IActionResult AddModel(ModelDTO model)
         {
             _modelService.Create(model);
-            
             return Redirect("/Home");
         }
-
     }
 }

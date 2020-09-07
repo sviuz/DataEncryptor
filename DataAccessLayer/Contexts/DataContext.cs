@@ -17,8 +17,13 @@ namespace DataAccessLayer.Contexts
             modelBuilder.Entity<DataModel>().HasData(new DataModel { Id = 1, Name = "fx999", Desc = "Model" });
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
-            => base.OnConfiguring(optionsBuilder);
+        
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+            //optionsBuilder.UseMySql(b => b.MigrationsAssembly("DataEncryptor"));
+        }
 
         public DbSet<DataModel> Models { get; set; }
     }

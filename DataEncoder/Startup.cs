@@ -36,8 +36,8 @@ namespace DataEncoder
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddTransient<IModelService, ModelService>();
-            services.AddTransient<IUnitOfWork, EFUnitOfWork>();
+            services.AddScoped<IModelService, ModelService>();
+            services.AddScoped<IUnitOfWork, EFUnitOfWork>();
             services.AddScoped<IRepository<DataModel>, ModelRepository>();
         }
 
