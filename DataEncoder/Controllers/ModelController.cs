@@ -1,6 +1,5 @@
 ﻿using BLL.DTO;
 using BLL.Interfaces;
-using BLL.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataEncryptor.Controllers
@@ -13,7 +12,6 @@ namespace DataEncryptor.Controllers
         {
             _modelService = modelService;
         }
-
         public IActionResult AddModel()
         {
             return View();
@@ -23,7 +21,6 @@ namespace DataEncryptor.Controllers
         public IActionResult AddModel(ModelDTO model)
         {
             _modelService.Create(model);
-            Encrypt(model);
             return Redirect("/Home");
         }
 
@@ -36,14 +33,16 @@ namespace DataEncryptor.Controllers
         [HttpPost]
         public IActionResult EditModel(ModelDTO model)
         {
-            _modelService.Update(model);
+            try
+            {
+                _modelService.Update(model);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
             return Redirect("/Home");
         }
 
-        private void Encrypt(ModelDTO model)
-        {
-            model.Name = Encryptor.EncodeOrDecrypt(model.Name);
-            model.Desc = Encryptor.EncodeOrDecrypt(model.Desc);
-        }
     }
 }

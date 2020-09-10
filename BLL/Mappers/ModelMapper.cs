@@ -4,7 +4,7 @@ using DataAccessLayer.Entities;
 
 namespace BLL.Mappers
 {
-    public class ModelMapper : Profile
+    public class ModelMapper :Profile
     {
         public ModelMapper()
         {

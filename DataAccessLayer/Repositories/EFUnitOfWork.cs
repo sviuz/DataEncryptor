@@ -7,7 +7,6 @@ namespace DataAccessLayer.Repositories
 {
     public class EFUnitOfWork : IUnitOfWork
     {
-
         private DataContext _dataContext;
         private ModelRepository _modelRepository;
 
@@ -16,21 +15,17 @@ namespace DataAccessLayer.Repositories
             _dataContext = dataContext;
         }
 
-        
-
-        public IModelRepository<DataModel> Models
+        public IRepository<DataModel> Models
         {
             get
             {
                 if (_modelRepository == null)
                 {
-                    _modelRepository = new ModelRepository(_dataContext);
+                    _modelRepository= new ModelRepository(_dataContext);
                 }
                 return _modelRepository;
             }
         }
-
-        public IModelRepository<DataIdentityUser> Users => throw new NotImplementedException();
 
         private bool disposed = false;
 
@@ -56,7 +51,7 @@ namespace DataAccessLayer.Repositories
         {
             try
             {
-                _dataContext.SaveChanges();
+               _dataContext.SaveChanges();
             }
             catch (Exception ex)
             {
