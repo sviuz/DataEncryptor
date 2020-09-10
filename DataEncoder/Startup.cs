@@ -31,6 +31,8 @@ namespace DataEncoder
             services.AddControllers();
             services.AddAutoMapper(typeof(ModelMapper));
 
+            
+
             services.AddDbContext<DataContext>(options => 
             {
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));

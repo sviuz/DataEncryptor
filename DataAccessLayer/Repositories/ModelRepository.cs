@@ -2,6 +2,7 @@
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,10 +23,15 @@ namespace DataAccessLayer.Repositories
         {
             try
             {
-                var newItem = new DataModel { Id = item.Id, Name = item.Name, Desc = item.Desc };
+                var newItem = new DataModel 
+                { 
+                    Id = item.Id, 
+                    Name = item.Name, 
+                    Desc = item.Desc 
+                };
                 _dataContext.Models.Add(newItem);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw ex.InnerException;
             }
