@@ -3,7 +3,6 @@ using BLL.DTO;
 using BLL.Interfaces;
 using DataAccessLayer.Entities;
 using DataAccessLayer.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace BLL.Services
@@ -23,13 +22,6 @@ namespace BLL.Services
         {
             var newModel = _mapper.Map<DataModel>(model);
             database.Models.Create(newModel);
-            database.Save();
-        }
-
-        public void Delete(ModelDTO model)
-        {
-            var data = _mapper.Map<DataModel>(model);
-            database.Models.Delete(data.Id);
             database.Save();
         }
 

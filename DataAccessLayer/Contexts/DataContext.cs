@@ -5,7 +5,7 @@ namespace DataAccessLayer.Contexts
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) 
+        public DataContext(DbContextOptions<DataContext> options)
             : base(options)
         {
             Database.EnsureCreated();
@@ -16,8 +16,6 @@ namespace DataAccessLayer.Contexts
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<DataModel>().HasData(new DataModel { Id = 1, Name = "fx999", Desc = "Model" });
         }
-
-        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

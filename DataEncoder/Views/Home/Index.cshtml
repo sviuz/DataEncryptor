@@ -1,9 +1,11 @@
 ﻿@using BLL.DTO
 @model IEnumerable<ModelDTO>
 
-
 <!DOCTYPE html>
 <html>
+<head>
+    <link type="text/css" rel="stylesheet" href="~/css/StyleSheet.css" />
+</head>
 <body>
     <div>
         <table>
@@ -11,19 +13,27 @@
                 <tr>
                     <th>Name</th>
                     <th>Value</th>
+                    <th>
+                        <a asp-controller="Model" asp-action="AddModel">
+                            Add Model
+                        </a>
+                    </th>
                 </tr>
             </thead>
+
             @foreach (var m in Model)
             {
-                <tr class="list-table-tr" data-id="@m.Id">
-                    <td class="list-table-td">@m.Name</td>
-                    <td class="list-table-td">@m.Desc</td>
-                    <td><a asp-controller="Model" asp-action="EditModel" asp-route-id="@m.Id">Edit Model</a></td>
+                <tr>
+                    <td>@m.Name</td>
+                    <td>@m.Desc</td>
+                    <td>
+                        <a asp-controller="Model" asp-action="EditModel" asp-route-id="@m.Id">
+                            Edit Model
+                        </a>
+                    </td>
                 </tr>
             }
         </table>
-        <a asp-controller="Model" asp-action="AddModel">Add Model</a>
-        
     </div>
 </body>
 </html>

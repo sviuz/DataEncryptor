@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BLL.Interfaces;
+﻿using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataEncryptor.Controllers
 {
     public class HomeController : Controller
     {
-        IModelService _modelService;
+        private IModelService _modelService;
 
         public HomeController(IModelService modelService)
         {

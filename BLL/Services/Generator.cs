@@ -1,7 +1,4 @@
-﻿using BLL.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace BLL.Services
 {
@@ -18,7 +15,7 @@ namespace BLL.Services
             return str;
         }
 
-        static char addSymbol()
+        private static char addSymbol()
         {
             Random rnd = new Random();
             string Alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!№;%:?*()_-+=^/?.,'\" ";

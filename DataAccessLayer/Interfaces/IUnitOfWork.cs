@@ -1,12 +1,14 @@
 ﻿using DataAccessLayer.Entities;
 using System;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer.Interfaces
 {
-    public interface IUnitOfWork :IDisposable
+    public interface IUnitOfWork : IDisposable
     {
-        IRepository<DataModel> Models { get; }
+        IModelRepository<DataModel> Models { get; }
+
+        IModelRepository<DataIdentityUser> Users { get; }
+
         void Save();
     }
 }
