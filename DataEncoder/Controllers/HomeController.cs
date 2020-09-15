@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataEncryptor.Controllers
@@ -16,6 +17,7 @@ namespace DataEncryptor.Controllers
             _modelService = modelService;
         }
 
+        
         public IActionResult Index()
         {
             var models = _modelService.GetAll();

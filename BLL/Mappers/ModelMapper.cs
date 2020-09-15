@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BLL.DTO;
+using BLL.DTO.ViewModels;
 using DataAccessLayer.Entities;
 
 namespace BLL.Mappers
@@ -10,6 +11,8 @@ namespace BLL.Mappers
         {
             CreateMap<ModelDTO, DataModel>();
             CreateMap<DataModel, ModelDTO>();
+            CreateMap<UserDTO, DataUser>();
+            CreateMap<DataUser, UserDTO>();
         }
     }
 }

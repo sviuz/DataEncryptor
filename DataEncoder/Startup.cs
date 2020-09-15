@@ -12,6 +12,7 @@ using DataAccessLayer.Contexts;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.Entities;
 using BLL.Mappers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace DataEncoder
 {
@@ -31,19 +32,43 @@ namespace DataEncoder
             services.AddControllers();
             services.AddAutoMapper(typeof(ModelMapper));
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => //CookieAuthenticationOptions
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
             
 
             services.AddDbContext<DataContext>(options => 
             {
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+                options
+                .UseMySql(Configuration
+                .GetConnectionString("DefaultConnection")
+                );
             });
 
-            services.AddScoped<IModelService, ModelService>();
-            services.AddScoped<IUnitOfWork, EFUnitOfWork>();
-            services.AddScoped<IRepository<DataModel>, ModelRepository>();
+            services.AddDbContext<UserContext>(options=>
+            {
+                options
+                .UseMySql(Configuration
+                .GetConnectionString("UserConnection"));
+            });
+
+
+            //services.AddIdentity<IdentityUser, IdentityRole>()//??переопределить IdentityUser и IdentityRole
+                //.AddEntityFrameworkStores<AuthenticationContext>();
+
+
+            services.AddTransient<IModelService, ModelService>();
+            services.AddTransient<IUnitOfWork, EFUnitOfWork>();
+            services.AddTransient<IRepository<DataModel>, ModelRepository>();
+
+            services.AddControllersWithViews();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(
+            IApplicationBuilder app, 
+            IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -54,6 +79,7 @@ namespace DataEncoder
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

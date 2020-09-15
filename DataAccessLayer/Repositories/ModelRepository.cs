@@ -4,7 +4,6 @@ using DataAccessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace DataAccessLayer.Repositories
@@ -33,7 +32,7 @@ namespace DataAccessLayer.Repositories
             }
             catch (Exception ex)
             {
-                throw ex.InnerException;
+                throw ex;
             }
         }
 
