@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BLL.Interfaces;
+﻿using BLL.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataEncryptor.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         IModelService _modelService;
@@ -17,6 +14,10 @@ namespace DataEncryptor.Controllers
             _modelService = modelService;
         }
 
+        public IActionResult Users()
+        {
+            return View();
+        }
         
         public IActionResult Index()
         {

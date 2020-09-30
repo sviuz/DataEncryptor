@@ -5,11 +5,11 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using BLL.DTO.ViewModels;
-using BLL.Services;
 using DataAccessLayer.Contexts;
 using DataAccessLayer.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataEncryptor.Controllers
@@ -18,6 +18,7 @@ namespace DataEncryptor.Controllers
     {
         private readonly UserContext _userContext;
         private readonly IMapper _mapper;
+        private readonly SignInManager<DataUser> _signInManager;
 
         public AccountController(UserContext userContext, IMapper mapper)
         {
@@ -38,15 +39,39 @@ namespace DataEncryptor.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userContext.Users.FirstOrDefault(u => u.Email == loginModel.Email && u.Password == loginModel.Password);
-                if (user!=null)
+                if (user != null)
                 {
-                    await Authenticate(loginModel.Email);
+                    await Authenticate(loginModel.Email);//???
 
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль.");
             }
             return View(loginModel);
+
+            //if (ModelState.IsValid)
+            //{
+            //    var newModel =
+            //        await _signInManager.PasswordSignInAsync(loginModel.Email, loginModel.Password, true, false);
+
+            //    if (newModel.Succeeded)
+            //    {
+            //        if (!string.IsNullOrEmpty(loginModel.returnURL) && Url.IsLocalUrl(loginModel.returnURL))
+            //        {
+            //            return Redirect(loginModel.returnURL);
+            //        }
+            //        else
+            //        {
+            //            return RedirectToAction("Index", "Home");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        ModelState.AddModelError("","Неправильный логин и(или) пароль");
+            //    }                
+            //}
+            //return View(loginModel);
+
         }
 
         [HttpGet]
@@ -86,7 +111,6 @@ namespace DataEncryptor.Controllers
             return View(registerModel);
         }
 
-
         public async Task Authenticate(string userName)
         {
             var claims = new List<Claim>
@@ -101,8 +125,8 @@ namespace DataEncryptor.Controllers
 
         public async Task<IActionResult> LogOut()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Account");
         }
 
 

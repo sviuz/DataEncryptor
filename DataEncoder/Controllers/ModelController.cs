@@ -1,9 +1,11 @@
 ﻿using BLL.DTO;
 using BLL.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataEncryptor.Controllers
 {
+    [Authorize]
     public class ModelController : Controller
     {
         private readonly IModelService _modelService;
@@ -12,18 +14,21 @@ namespace DataEncryptor.Controllers
         {
             _modelService = modelService;
         }
+
         public IActionResult AddModel()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult AddModel(ModelDTO model)
         {
             _modelService.Create(model);
             return Redirect("/Home");
         }
 
+        //[Authorize(Roles = "admin, moderator")]
         public IActionResult EditModel(int id)
         {
             var model = _modelService.Get(id);

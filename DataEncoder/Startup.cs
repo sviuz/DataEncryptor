@@ -24,7 +24,6 @@ namespace DataEncoder
         {
             Configuration = configuration;
         }
-
         
         public void ConfigureServices(IServiceCollection services)
         {
@@ -47,16 +46,19 @@ namespace DataEncoder
                 );
             });
 
+            services.AddDbContext<ApplicationDbContext>(options => 
+            {
+                options
+                .UseMySql(Configuration
+                .GetConnectionString("ApplicationConnection"));
+            });
+
             services.AddDbContext<UserContext>(options=>
             {
                 options
                 .UseMySql(Configuration
                 .GetConnectionString("UserConnection"));
             });
-
-
-            //services.AddIdentity<IdentityUser, IdentityRole>()//??переопределить IdentityUser и IdentityRole
-                //.AddEntityFrameworkStores<AuthenticationContext>();
 
 
             services.AddTransient<IModelService, ModelService>();
