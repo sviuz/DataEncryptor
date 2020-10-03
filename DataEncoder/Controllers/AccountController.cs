@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -123,9 +123,9 @@ namespace DataEncryptor.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
         }
 
-        public async Task<IActionResult> LogOut()
+        public IActionResult LogOut()
         {
-            await _signInManager.SignOutAsync();
+            SignOut();
             return RedirectToAction("Login", "Account");
         }
 

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DataEncryptor.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         IModelService _modelService;
@@ -19,12 +18,15 @@ namespace DataEncryptor.Controllers
             return View();
         }
         
+        [Authorize]
         public IActionResult Index()
         {
             var models = _modelService.GetAll();
             return View(models);
         }
 
+
+        [Authorize(Roles ="admin, moderator")]
         public IActionResult AddModel()
         {
             return View("/Model/AddModel");
